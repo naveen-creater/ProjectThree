@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    tools:context=".Activity.SensorActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center">
+        <Button
+            android:id="@+id/btnAccelerometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="accelerometerSensorOnClick"
+            android:text="Accelerometer -> to Shake Phone"
+            android:textAllCaps="false"/>
+
+
+        <Button
+            android:id="@+id/btnProximity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="proximitySensorOnClick"
+            android:textAllCaps="false"
+            android:text="ProximitySensor"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="12dp">
+        <Button
+            android:id="@+id/btnGyro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="gyroscopeSensorOnClick"
+            android:textAllCaps="false"
+            android:text="Gyroscope-> Rotate Phone" />
+
+
+        <Button
+            android:id="@+id/btnLightSensor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="lightSensorOnClick"
+            android:textAllCaps="false"
+            android:text="Light Sensor -> getBrightness" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="12dp">
+        <Button
+            android:id="@+id/btnStepCounterOnClick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="stepCounterOnClick"
+            android:textAllCaps="false"
+            android:text="Step Counter Sensor-> " />
+
+        <Button
+            android:id="@+id/btnAmbientTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="ambientTempSensorOnClick"
+            android:textAllCaps="false"
+            android:text="Ambient Temperature Sensor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center">
+        <Button
+            android:id= "@+id/btnEnable"
+            android:textAllCaps="false"
+            android:layout_width= "wrap_content"
+            android:layout_height= "wrap_content"
+            android:onClick= "enablePhone"
+            android:text= "Enable" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:id="@+id/btnCamera"
+            android:onClick="disableCamera"
+            android:text="Disable Camera"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="18dp"
+        android:text="Values would be entered here..." />
+
+</LinearLayout>
