@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.example.projectthree.Activity.LocationActivity;
 import com.example.projectthree.Activity.SensorActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -33,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                startActivity(new Intent(SplashActivity.this, SensorActivity.class));
+                startActivity(new Intent(SplashActivity.this, LocationActivity.class));
                 finish();
             }
 
