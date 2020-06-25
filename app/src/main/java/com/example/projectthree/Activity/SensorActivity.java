@@ -40,27 +40,27 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
     private float last_x, last_y, last_z;
     private static final int SHAKE_THRESHOLD = 600;
 
-    static final int RESULT_ENABLE = 1 ;
-    DevicePolicyManager deviceManger ;
-    ComponentName compName ;
-    Button btnEnable ;
-    boolean active,enable=false;
+    static final int RESULT_ENABLE = 1;
+    DevicePolicyManager deviceManger;
+    ComponentName compName;
+    Button btnEnable;
+    boolean active, enable = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor);
 
-        deviceManger = (DevicePolicyManager) getSystemService(Context. DEVICE_POLICY_SERVICE ) ;
-        compName = new ComponentName( this, DeviceAdmin. class ) ;
-        active = deviceManger.isAdminActive( compName ) ;
+        deviceManger = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+        compName = new ComponentName(this, DeviceAdmin.class);
+        active = deviceManger.isAdminActive(compName);
 
         textView = findViewById(R.id.tvResult);
 
         //todo
         //String from jni
 //        textView.setText(StringF());
-        btnEnable = findViewById(R.id. btnEnable ) ;
+        btnEnable = findViewById(R.id.btnEnable);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
@@ -113,10 +113,10 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
 
                     if (speed > SHAKE_THRESHOLD) {
                         Toast.makeText(getApplicationContext(), "Your phone just shook", Toast.LENGTH_LONG).show();
-                        if(enable)
-                            deviceManger .lockNow() ;
+                        if (enable)
+                            deviceManger.lockNow();
 
-                        //very Dangurous line..mobile is completely reseted
+//                        very Dangurous line..mobile is completely reset your mobile
 //                        deviceManger.wipeData(0);
 //                        deviceManger.reboot(compName);
                     }
@@ -194,27 +194,27 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
             textView.setText("Ambient Temperature Sensor not available");
         }
     }
-    public void enablePhone (View view) {
-        boolean active = deviceManger .isAdminActive( compName ) ;
+
+    public void enablePhone(View view) {
+        boolean active = deviceManger.isAdminActive(compName);
         if (active) {
-            deviceManger .removeActiveAdmin( compName ) ;
-            btnEnable .setText("Enable");
+            deviceManger.removeActiveAdmin(compName);
+            btnEnable.setText("Enable");
 
         } else {
-            Intent intent = new Intent(DevicePolicyManager. ACTION_ADD_DEVICE_ADMIN ) ;
-            intent.putExtra(DevicePolicyManager. EXTRA_DEVICE_ADMIN , compName ) ;
-            intent.putExtra(DevicePolicyManager. EXTRA_ADD_EXPLANATION , "You should enable the app!" ) ;
-            startActivityForResult(intent , RESULT_ENABLE ) ;
+            Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, compName);
+            intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "You should enable the app!");
+            startActivityForResult(intent, RESULT_ENABLE);
         }
     }
 
     public void disableCamera(View view) {
-        if (enable){
-            deviceManger.setCameraDisabled(compName,true);
-            Toast.makeText(this,"Camera app is disable..",Toast.LENGTH_LONG).show();
-        }
-        else{
-            Toast.makeText(this,"Please enable the System Admin",Toast.LENGTH_LONG).show();
+        if (enable) {
+            deviceManger.setCameraDisabled(compName, true);
+            Toast.makeText(this, "Camera app is disable..", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Please enable the System Admin", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -224,7 +224,7 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
         super.onResume();
 
         sensorManager.registerListener(this, accelerometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        sensorManager.registerListener(this, lightSensor,SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
         sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
         sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
         sensorManager.registerListener(this, tempSensor, SensorManager.SENSOR_DELAY_NORMAL);
@@ -238,21 +238,25 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
     }
 
     @Override
-    protected void onActivityResult ( int requestCode , int resultCode , @Nullable Intent
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent
             data) {
-        super .onActivityResult(requestCode , resultCode , data) ;
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case RESULT_ENABLE :
-                if (resultCode == Activity. RESULT_OK) {
-                    btnEnable .setText("Disable") ;
-                    enable=true;
+            case RESULT_ENABLE:
+                if (resultCode == Activity.RESULT_OK) {
+                    btnEnable.setText("Disable");
+                    enable = true;
                 } else {
-                    Toast.makeText(getApplicationContext() ,"Failed!" ,Toast. LENGTH_SHORT ).show() ;
-                    enable=false;
+                    Toast.makeText(getApplicationContext(), "Failed!", Toast.LENGTH_SHORT).show();
+                    enable = false;
                 }
                 return;
         }
     }
 
 
+    public void mobileReset(View view) {
+//        deviceManger.wipeData(0);
+//        deviceManger.reboot(compName);
+    }
 }
